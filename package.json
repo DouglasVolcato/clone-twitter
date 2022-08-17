@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.2",
+    "nodemon": "^2.0.19"
+  },
+  "name": "clone-twitter",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DouglasVolcato/clone-twitter.git"
+  },
+  "keywords": [],
+  "author": "Douglas Volcato",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DouglasVolcato/clone-twitter/issues"
+  },
+  "homepage": "https://github.com/DouglasVolcato/clone-twitter#readme"
+}
