@@ -16,7 +16,9 @@ const loginController = async (req, res) => {
     return res.status(400).send({ message: "Wrong password" });
   }
 
-  res.send(user);
+  const token = authService.generateToken(user._id);
+
+  res.send({ token });
 };
 
 module.exports = { loginController };
