@@ -8,4 +8,12 @@ const createUserService = async (body) => {
   return await User.create(body);
 };
 
-module.exports = { findByEmailuserService, createUserService };
+const findAllUserService = async () => {
+  return await User.find();
+};
+
+module.exports = {
+  findByEmailuserService,
+  createUserService,
+  findAllUserService,
+};
