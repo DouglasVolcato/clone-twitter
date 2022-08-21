@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { findByIdUserService } = require("../users/users.service");
 
 module.exports = (req, res, next) => {
-  const authHeader = req.headers.autorization;
+  const authHeader = req.headers["authorization"];
 
   if (!authHeader) {
     return res.status(401).send({ message: "The token was not informed." });
@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
   }
   const [scheme, token] = parts;
 
-  if (!/^Bearer^/i.test(scheme)) {
+  if (!/^Bearer$/i.test(scheme)) {
     return res.status(401).send({ message: "Invalid token" });
   }
 
