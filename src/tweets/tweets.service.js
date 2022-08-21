@@ -1,6 +1,8 @@
 const Tweet = require("./Tweet");
 
-const createTweetService = (message, userId) =>
-  Tweet.create({ message, user: userId });
+const createTweetService = async (message, userId) =>
+  await Tweet.create({ message, user: userId });
 
-module.exports = { createTweetService };
+const findAllTweetsService = async () => await Tweet.find().sort({ _id: -1 });
+
+module.exports = { createTweetService, findAllTweetsService };
