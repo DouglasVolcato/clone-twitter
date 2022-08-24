@@ -7,18 +7,16 @@ const loginController = async (req, res) => {
   const user = await authService.loginService(email);
 
   if (!user) {
-    res.status(400).send({ message: "User not found" });
+    return res.status(400).send({ message: "Usuário não encontrado!" });
   }
 
-  const verifyPassword = await bcrypt.compare(password, user.password);
+  const isPasswordValid = await bcrypt.compare(password, user.password);
 
-  if (verifyPassword === false) {
-    return res.status(400).send({ message: "Wrong password" });
+  if (!isPasswordValid) {
+    return res.status(400).send({ message: "Senha inválida!" });
   }
 
-  const token = authService.generateToken(user._id);
-
-  res.send({ token });
+  res.send(user);
 };
 
 module.exports = { loginController };

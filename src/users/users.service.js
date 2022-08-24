@@ -1,21 +1,15 @@
-const User = require("./user");
+const User = require("./User");
 
-const findByEmailuserService = async (email) => {
-  return await User.findOne({ email: email });
-};
+const findByEmailUserService = (email) => User.findOne({ email: email });
 
-const createUserService = async (body) => {
-  return await User.create(body);
-};
+const createUserService = (body) => User.create(body);
 
-const findAllUserService = async () => {
-  return await User.find();
-};
+const findAllUserService = () => User.find();
 
 const findByIdUserService = (idUser) => User.findById(idUser);
 
 module.exports = {
-  findByEmailuserService,
+  findByEmailUserService,
   createUserService,
   findAllUserService,
   findByIdUserService,
