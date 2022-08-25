@@ -41,7 +41,6 @@ const findAllTweetsController = async (req, res) => {
         avatar: tweet.user.avatar,
       })),
     });
-
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -72,5 +71,57 @@ const searchTweetController = async (req, res) => {
   });
 };
 
+const likeTweetController = async (req, res) => {
+  const { id } = req.params;
 
-module.exports = {createTweetController, findAllTweetsController, searchTweetController};
+  const userId = req.userId;
+
+  const tweetLiked = await tweetService.likesService(id, userId);
+
+  if (tweetLiked.lastErrorObject.n === 0) {
+    return res.status(400).send({ message: "Você já deu like neste tweet!" });
+  }
+
+  return res.send({
+    message: "Like realizado com sucesso!",
+  });
+};
+
+const retweetTweetController = async (req, res) => {
+  const { id } = req.params;
+
+  const userId = req.userId;
+
+  const tweetreteeted = await tweetService.reteetsService(id, userId);
+
+  if (tweetreteeted.lastErrorObject.n === 0) {
+    return res
+      .status(400)
+      .send({ message: "Você já deu retweet neste tweet!" });
+  }
+
+  return res.send({
+    message: "Retweet realizado com sucesso!",
+  });
+};
+
+const commentController = async (req, res) => {
+  const { id } = req.params;
+
+  const userId = req.userId;
+
+  await tweetService.commentsService(id, userId);
+
+  return res.send({
+    message: "Comentário realizado com sucesso!",
+  });
+};
+
+module.exports = {
+  createTweetController,
+  findAllTweetsController,
+  searchTweetController,
+  likeTweetController,
+  retweetTweetController,
+  commentController,
+};
