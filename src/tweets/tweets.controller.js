@@ -23,13 +23,46 @@ const createTweetController = async (req, res) => {
 
 const findAllTweetsController = async (req, res) => {
   try {
-    const tweets = await tweetService.findAllTweetsService();
+    let { limit, offset } = req.query;
+
+    limit = Number(limit);
+    offset = Number(offset);
+
+    if (!limit) {
+      limit = 4;
+    }
+    if (!offset) {
+      offset = 0;
+    }
+
+    const tweets = await tweetService.findAllTweetsService(offset, limit);
+
+    const total = await tweetService.countTweetsService();
+
+    const currentUrl = await req.baseUrl;
+
+    const next = offset + limit;
+    const nextUrl =
+      next < total ? `${currentUrl}?limit=${limit}&offset=${next}` : null;
+
+    const previous = offset - limit < 0 ? null : offset - limit;
+    const previousUrl =
+      previous != null
+        ? `${currentUrl}?limit=${limit}&offset=${previous}`
+        : null;
+
+    // const prview
 
     if (tweets.length === 0) {
       return res.status(400).send({ message: "Não existem tweets!" });
     }
 
     return res.send({
+      nextUrl: nextUrl,
+      previousUrl: previousUrl,
+      limit: limit,
+      offset: offset,
+      total: total,
       results: tweets.map((tweet) => ({
         id: tweet._id,
         message: tweet.message,

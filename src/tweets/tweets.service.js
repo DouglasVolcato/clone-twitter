@@ -3,8 +3,10 @@ const Tweet = require("./Tweet");
 const createTweetService = (message, userId) =>
   Tweet.create({ message, user: userId });
 
-const findAllTweetsService = () =>
-  Tweet.find().sort({ _id: -1 }).populate("user");
+const findAllTweetsService = (offset = 0, limit = 4) =>
+  Tweet.find().sort({ _id: -1 }).skip(offset).limit(limit).populate("user");
+
+const countTweetsService = () => Tweet.countDocuments();
 
 const searchTweetService = (message) =>
   Tweet.find({
@@ -67,4 +69,5 @@ module.exports = {
   likesService,
   reteetsService,
   commentsService,
+  countTweetsService,
 };
