@@ -1,4 +1,3 @@
-require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { findByIdUserService } = require("../users/users.service");
 
