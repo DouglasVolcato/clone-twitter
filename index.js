@@ -1,10 +1,10 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const connectDatabase = require("./database/database");
-const userRoute = require("./users/users.route");
-const authRoute = require("./auth/auth.route");
-const tweetsRoute = require("./tweets/tweets.route");
+const connectDatabase = require("./src/database/database");
+const userRoute = require("./src/users/users.route");
+const authRoute = require("./src/auth/auth.route");
+const tweetsRoute = require("./src/tweets/tweets.route");
 
 const port = process.env.PORT || 3001;
 const app = express();
